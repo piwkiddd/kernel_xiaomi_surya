@@ -1,0 +1,26 @@
+name: Build Kernel Surya
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Kernel
+        uses: dabao1955/kernel_build_action@v1.2
+        with:
+          kernel-url: https://github.com/piwkiddd/kernel_xiaomi_surya
+          kernel-branch: patch-1
+          config: surya-perf_defconfig
+          arch: arm64
+          android-version: 10
+          aosp-clang: true
+          aosp-gcc: true
+          aosp-clang-version: r383902
+          anykernel3: true
+          release: true
+          access-token: ${{ secrets.GITHUB_TOKEN }}
